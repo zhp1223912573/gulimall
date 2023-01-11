@@ -3,7 +3,7 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.56.10:3306/gulimall_sms
+    url: jdbc:mysql://192.168.56.10:3306/gulimall_ums
 
 mybatis-plus:
   mapper-locations: classpath*:/mapper/**/*.xml
@@ -12,4 +12,4 @@ mybatis-plus:
       id-type: auto
 
 server:
-  port: 7000
+  port: 8000
