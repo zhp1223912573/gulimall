@@ -31,6 +31,17 @@ public class CouponController {
     private CouponService couponService;
 
     /**
+     * 测试远程服务调用
+     * @return
+     */
+    @RequestMapping("/member/list")
+    public R membercoupons(){
+        CouponEntity couponEntity = new CouponEntity();
+        couponEntity.setCouponName("满100-1000");
+        return R.ok().put("coupons",Arrays.asList(couponEntity));
+    }
+
+    /**
      * 列表
      */
     @RequestMapping("/list")
