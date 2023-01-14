@@ -2,12 +2,22 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: test_route
-          uri: https://www.baidu.com
-          predicates:
-            - Query=url,baidu
+#        - id: test_route
+#          uri: https://www.baidu.com
+#          predicates:
+#            - Query=url,baidu
+#
+#        - id: qq_route
+#          uri: https://www.qq.com
+#          predicates:
+#            - Query=url,qq
 
-        - id: qq_route
-          uri: https://www.qq.com
+        - id: admin_route
+          uri: lb://renren-fast
           predicates:
-            - Query=url,qq
+           #来自前端项目的uri包含/api
+            - Path=/api/**
+          #前端获取验证码路径：http://localhost:88/api/captcha.jpg?uuid=bdb8662f-ddb4-4bf7-865a-227460e65810
+          #应该转化为： http://localhost:8080/renren-fast/captcha.jpg?uuid=bdb8662f-ddb4-4bf7-865a-227460e65810
+          filters:
+            - RewritePath=/api/(?<segement>.*),/renren-fast/$\{segement}
