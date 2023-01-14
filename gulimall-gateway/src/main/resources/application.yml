@@ -11,11 +11,21 @@ spring:
 #          uri: https://www.qq.com
 #          predicates:
 #            - Query=url,qq
+        #更精确到路由需要放在前面，避免被覆盖
+        - id: product_route
+          uri: lb://gulimall-product
+          predicates:
+            #来自前端项目的uri包含/api/product
+            - Path=/api/product/**
+          #前端获取商品分类路径：http://localhost:88/api/product/category/list/tree
+          #应该转化为： http://localhost:10000/product/category/list/tree
+          filters:
+            - RewritePath=/api/(?<segement>.*),/$\{segement}
 
         - id: admin_route
           uri: lb://renren-fast
           predicates:
-           #来自前端项目的uri包含/api
+          #来自前端项目的uri包含/api
             - Path=/api/**
           #前端获取验证码路径：http://localhost:88/api/captcha.jpg?uuid=bdb8662f-ddb4-4bf7-865a-227460e65810
           #应该转化为： http://localhost:8080/renren-fast/captcha.jpg?uuid=bdb8662f-ddb4-4bf7-865a-227460e65810
