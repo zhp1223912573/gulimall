@@ -11,7 +11,8 @@ spring:
 #          uri: https://www.qq.com
 #          predicates:
 #            - Query=url,qq
-        #更精确到路由需要放在前面，避免被覆盖
+
+        #更精确路由需要放在前面，避免被覆盖
         - id: product_route
           uri: lb://gulimall-product
           predicates:

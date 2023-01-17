@@ -53,6 +53,17 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return level1Menu;
     }
 
+    @Override
+    public void removeMenuByIds(List<Long> asList) {
+        //TODO 检查被删除的菜单是否被引用
+
+        //物理删除，直接从数据库上清除掉
+//        baseMapper.deleteBatchIds(asList);
+
+        //引入mybatis-plus配置，指定字段，实现逻辑删除
+        baseMapper.deleteBatchIds(asList);
+    }
+
     /**
      * 递归获取root的所有子分类
      * @param root
