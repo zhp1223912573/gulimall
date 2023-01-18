@@ -2,10 +2,7 @@ package com.atguigu.gulimall.product.service.impl;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -62,6 +59,31 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
         //引入mybatis-plus配置，指定字段，实现逻辑删除
         baseMapper.deleteBatchIds(asList);
+    }
+
+    /**
+     * 找到catelogId的完整路径
+     * @param catelogId
+     * @return
+     */
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+        List<Long> path = new ArrayList<>();
+
+        findParentsPath(catelogId,path);
+        //得到的是catelogid的逆序路径，需要反转
+        Collections.reverse(path);
+
+        return path.toArray(new Long[path.size()]);
+    }
+
+    private List<Long> findParentsPath(Long catelogId, List<Long> path) {
+        CategoryEntity byId = this.getById(catelogId);
+        path.add(catelogId);
+        if(byId.getParentCid()!=0){
+            findParentsPath(byId.getParentCid(),path);
+        }
+        return path;
     }
 
     /**

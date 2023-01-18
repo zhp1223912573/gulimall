@@ -1,5 +1,6 @@
 package com.atguigu.gulimall.product.service.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -21,6 +22,33 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
         IPage<AttrGroupEntity> page = this.page(
                 new Query<AttrGroupEntity>().getPage(params),
                 new QueryWrapper<AttrGroupEntity>()
+        );
+
+        return new PageUtils(page);
+    }
+
+    @Override
+    public PageUtils queryPage(Map<String, Object> params, Long catelogId) {
+        //等于0默认查询所有信息
+        if(catelogId==0){
+            return queryPage(params);
+        }
+
+
+        QueryWrapper<AttrGroupEntity> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("catelog_id",catelogId);
+
+        //查看params中是否包含key值，该key值可能为三级类别属性或者id
+        String key = (String)params.get("key");
+        if(!StringUtils.isEmpty(key)){
+            queryWrapper.and(obj->{
+                obj.eq("attr_group_id",key).or().like("attr_group_name",key);
+            });
+        }
+
+        IPage<AttrGroupEntity> page = this.page(
+                new Query<AttrGroupEntity>().getPage(params),
+               queryWrapper
         );
 
         return new PageUtils(page);

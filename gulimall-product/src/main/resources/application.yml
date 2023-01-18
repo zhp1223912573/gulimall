@@ -27,3 +27,7 @@ server:
 #    secret-key: RBOVF9iIWb7QXAEzmqFOPzdQlS6Ih7
 #    oss:
 #      endpoint: oss-cn-guangzhou.aliyuncs.com
+
+logging:
+    level:
+      com.atguigu.gulimall: debug
