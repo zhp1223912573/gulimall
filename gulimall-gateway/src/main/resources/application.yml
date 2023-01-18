@@ -11,6 +11,15 @@ spring:
 #          uri: https://www.qq.com
 #          predicates:
 #            - Query=url,qq
+        - id: third_party_route
+          uri: lb://gulimall-third-party
+          predicates:
+            #来自前端项目的uri包含/api/thirdparty
+            - Path=/api/thirdparty/**
+            #前端获取商品分类路径：http://localhost:88/api/thirdparty/oss/policy
+            #应该转化为： http://localhost:30000/oss/policy
+          filters:
+              - RewritePath=/api/thirdparty/(?<segement>.*),/$\{segement}
 
         #更精确路由需要放在前面，避免被覆盖
         - id: product_route

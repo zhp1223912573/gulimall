@@ -64,6 +64,37 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-alicloud-oss</artifactId>-->
+<!--        </dependency>-->
+
+        <!--
+        解决spring-cloud-starter-alicloud-oss导入失败博客
+        https://blog.csdn.net/weixin_41275621/article/details/120703292
+        -->
+<!--        <dependency>-->
+<!--            <groupId>com.alibaba.cloud</groupId>-->
+<!--            <artifactId>aliyun-oss-spring-boot-starter</artifactId>-->
+<!--            <version>1.0.0</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>com.aliyun</groupId>-->
+<!--                    <artifactId>aliyun-java-sdk-oss</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.aliyun</groupId>-->
+<!--            <artifactId>aliyun-java-sdk-core</artifactId>-->
+<!--            <version>4.5.7</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>2.0.1.Final</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
