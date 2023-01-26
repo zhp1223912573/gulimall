@@ -86,7 +86,11 @@ public class BrandController {
     @RequestMapping("/update")
     //@RequiresPermissions("product:brand:update")
     public R update(@Validated({UpdateGroup.class}) @RequestBody BrandEntity brand){
-        brandService.updateById(brand);
+//        brandService.updateById(brand);
+
+        //修改品牌信息时保证其他包含该冗余信息的表也得到相应的更新
+        brandService.updateDetail(brand);
+
 
         return R.ok();
     }
