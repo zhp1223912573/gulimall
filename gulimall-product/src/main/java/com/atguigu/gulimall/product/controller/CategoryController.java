@@ -70,11 +70,20 @@ public class CategoryController {
      */
     @RequestMapping("/update/sort")
     //@RequiresPermissions("product:category:update")
-    public R update(@RequestBody CategoryEntity[] category){
+    public R updateSort(@RequestBody CategoryEntity[] category){
         //批量修改
 		categoryService.updateBatchById(Arrays.asList(category));
         return R.ok();
     }
+
+    @RequestMapping("/update")
+    //@RequiresPermissions("product:category:update")
+    public R update(@RequestBody CategoryEntity category){
+        //批量修改
+        categoryService.updateCascade(category);
+        return R.ok();
+    }
+
 
     /**
      * 删除

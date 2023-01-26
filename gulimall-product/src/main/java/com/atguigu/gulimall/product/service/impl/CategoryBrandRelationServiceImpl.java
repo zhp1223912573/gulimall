@@ -59,7 +59,7 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
     /**
      * 更新品牌分类关系表中品牌id为brandId的商品名称为brandName
      * @param brandId
-     * @param name
+     * @param brandName
      */
     @Override
     public void updateBrand(Long brandId, String brandName) {
@@ -69,6 +69,25 @@ public class CategoryBrandRelationServiceImpl extends ServiceImpl<CategoryBrandR
 
         this.update(categoryBrandRelationEntity,
                 new UpdateWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId));
+    }
+
+    /**
+     * 更新品牌分类关系表中分类id为catId的分类名称为catName
+     * @param catId
+     * @param catName
+     */
+    @Override
+    public void updateCategory(Long catId, String catName) {
+        //调用已有函数
+//        CategoryBrandRelationEntity categoryBrandRelationEntity = new CategoryBrandRelationEntity();
+//        categoryBrandRelationEntity.setCatelogId(catId);
+//        categoryBrandRelationEntity.setCatelogName(catName);
+//
+//        this.update(categoryBrandRelationEntity,
+//                new UpdateWrapper<CategoryBrandRelationEntity>().eq("catelog_id",catId));
+
+        //手动编写sql语句
+        this.baseMapper.updateCategory(catId,catName);
     }
 
 }

@@ -29,15 +29,7 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
 
     @Override
     public PageUtils queryPage(Map<String, Object> params, Long catelogId) {
-        //等于0默认查询所有信息
-        if(catelogId==0){
-            return queryPage(params);
-        }
-
-
         QueryWrapper<AttrGroupEntity> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("catelog_id",catelogId);
-
         //查看params中是否包含key值，该key值可能为三级类别属性或者id
         String key = (String)params.get("key");
         if(!StringUtils.isEmpty(key)){
@@ -46,12 +38,21 @@ public class AttrGroupServiceImpl extends ServiceImpl<AttrGroupDao, AttrGroupEnt
             });
         }
 
-        IPage<AttrGroupEntity> page = this.page(
-                new Query<AttrGroupEntity>().getPage(params),
-               queryWrapper
-        );
-
-        return new PageUtils(page);
+        //等于0默认查询所有信息
+        if(catelogId==0){
+            IPage<AttrGroupEntity> page = this.page(
+                    new Query<AttrGroupEntity>().getPage(params),
+                    queryWrapper
+            );
+            return new PageUtils(page);
+        }else{
+            queryWrapper.eq("catelog_id",catelogId);
+            IPage<AttrGroupEntity> page = this.page(
+                    new Query<AttrGroupEntity>().getPage(params),
+                    queryWrapper
+            );
+            return new PageUtils(page);
+        }
     }
 
 }
