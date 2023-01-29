@@ -81,9 +81,17 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
     }
 
+    /**
+     * 插叙分类id{catelogId}包含属性集合
+     * @param params
+     * @param catelogId
+     * @param type 属性类型 1.销售属性 2.类型属性
+     * @return
+     */
     @Override
-    public PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId) {
-        QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<>();
+    public PageUtils queryBaseAttrPage(Map<String, Object> params, Long catelogId,String type) {
+        QueryWrapper<AttrEntity> queryWrapper = new QueryWrapper<AttrEntity>()
+                .eq("attr_type","base".equalsIgnoreCase(type)?ProductConstant.AttrEnum.ATTR_TYPE_BASE.getCode():ProductConstant.AttrEnum.ATTR_TYPE_SALE.getCode());
 
         //检查是否传输分类id
         if(catelogId!=0){
@@ -122,7 +130,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
                     attrRespVo.setGroupName(attrGroupEntity.getAttrGroupName());
                 }
             }
-            //所属分类id存在，则搜书所属分类名
+            //所属分类id存在，则搜索所属分类名
             CategoryEntity categoryEntity = categoryDao.selectById(attrEntity.getCatelogId());
             if (categoryEntity != null) {
                 attrRespVo.setCatelogName(categoryEntity.getName());

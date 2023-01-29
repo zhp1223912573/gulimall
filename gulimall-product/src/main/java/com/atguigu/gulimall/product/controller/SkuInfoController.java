@@ -3,6 +3,7 @@ package com.atguigu.gulimall.product.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.atguigu.gulimall.product.vo.SpuSaveVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +31,10 @@ public class SkuInfoController {
     @Autowired
     private SkuInfoService skuInfoService;
 
+
+
     /**
-     * 列表
+     * Spu条件检索
      */
     @RequestMapping("/list")
     //@RequiresPermissions("product:skuinfo:list")
@@ -60,7 +63,6 @@ public class SkuInfoController {
     //@RequiresPermissions("product:skuinfo:save")
     public R save(@RequestBody SkuInfoEntity skuInfo){
 		skuInfoService.save(skuInfo);
-
         return R.ok();
     }
 
