@@ -29,6 +29,14 @@ spring:
           filters:
               - RewritePath=/api/(?<segement>.*),/$\{segement}
 
+        - id: ware_route
+          uri: lb://gulimall-ware
+          predicates:
+              #来自前端项目的uri包含/api/ware
+              - Path=/api/ware/**
+          filters:
+              - RewritePath=/api/(?<segement>.*),/$\{segement}
+
         #更精确路由需要放在前面，避免被覆盖
         - id: product_route
           uri: lb://gulimall-product

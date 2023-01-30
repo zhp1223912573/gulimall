@@ -1,4 +1,4 @@
-package com.atguigu.gulimall.product.controller.config;
+package com.atguigu.gulimall.ware.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.mybatis.spring.annotation.MapperScan;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * @author zhp
  * @date 2023-01-26 19:57
  */
-@MapperScan("com.atguigu.gulimall.product.dao")
+@MapperScan("com.atguigu.gulimall.ware.dao")
 @Configuration
 @EnableTransactionManagement
 public class MybatisPlusConfig {
