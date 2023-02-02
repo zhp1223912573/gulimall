@@ -111,6 +111,15 @@ public class SpuInfoServiceImpl extends ServiceImpl<SpuInfoDao, SpuInfoEntity> i
         return new PageUtils(page);
     }
 
+    /**
+     * 商品上架功能
+     * @param spuId
+     */
+    @Override
+    public void up(Long spuId) {
+
+    }
+
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
